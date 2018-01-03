@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <div class="jumbotron text-center">
+    <h1>Messages Access</h1>
+    <p class="lead">Please enter the message id below.</p>
+      <form action="/" method="POST">
+      <input type="number" style="width: 300px;" name="message_id" placeholder="Message id number (numbers only)">
+          <br><br>
+      <input type="submit" value="Submit" class="btn btn-success btn-lg">
+    </form>
+  </div>
+{% endblock %}
