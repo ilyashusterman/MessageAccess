@@ -3,11 +3,6 @@ import zlib
 
 from flask import Flask, render_template, redirect, url_for, request
 
-
-class CompressedContentError(RuntimeError):
-    pass
-
-
 app = Flask(__name__)
 # STORAGE_DIR = '/mnt/efs/'
 STORAGE_DIR = '/Users/tomer/efs/'  # FOR DEBUG ONLY!
@@ -51,11 +46,9 @@ def get_message_full_file_path(message_id):
     if not isinstance(message_id, int):
         message_id = int(message_id)
 
-    levels = list()
+    levels = []
 
-    # Create 4 levels
-
-    for i in range(3):
+    for i in range(3):  # Create 4 levels
         levels.append(str(message_id % 1000))
         message_id = int(message_id / 1000)
 
@@ -64,6 +57,10 @@ def get_message_full_file_path(message_id):
 
     full_path = os.path.join(STORAGE_DIR, '/'.join(levels[:3]), levels[3] + '.html')
     return full_path
+
+
+class CompressedContentError(RuntimeError):
+    pass
 
 
 if __name__ == '__main__':
